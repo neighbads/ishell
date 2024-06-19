@@ -41,7 +41,7 @@ type Cmd struct {
 	children map[string]*Cmd
 
 	// Func Arg
-	funcArg any
+	FuncArg any
 }
 
 // AddCmd adds cmd as a subcommand.
