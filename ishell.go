@@ -277,7 +277,7 @@ func (s *Shell) handleCommand(str []string) (bool, error) {
 	}
 	c := newContext(s, cmd, args)
 	if cmd.FuncWithArg != nil {
-		cmd.FuncWithArg(c, cmd.funcArg)
+		cmd.FuncWithArg(c, cmd.FuncArg)
 	} else {
 		cmd.Func(c)
 	}
