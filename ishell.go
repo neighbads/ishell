@@ -242,12 +242,16 @@ func (s *Shell) handleCommand(str []string) (bool, error) {
 		return false, nil
 	}
 	// trigger help if func is not registered or auto help is true
-	if cmd.Func == nil || (s.autoHelp && len(args) == 1 && args[0] == "help") {
+	if (cmd.Func == nil && cmd.FuncWithArg == nil) || (s.autoHelp && len(args) == 1 && args[0] == "help") {
 		s.Println(cmd.HelpText())
 		return true, nil
 	}
 	c := newContext(s, cmd, args)
-	cmd.Func(c)
+	if cmd.FuncWithArg != nil {
+		cmd.FuncWithArg(c, cmd.funcArg)
+	} else {
+		cmd.Func(c)
+	}
 	return true, c.err
 }
 
